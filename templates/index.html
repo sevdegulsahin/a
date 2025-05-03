@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeşil Adım - Karbon Ayak İzi Hesaplama</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/">Yeşil Adım</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#calculate">Hesapla</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Hakkında</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="bg-light py-5">
+        <div class="container text-center">
+            <h1>Karbon Ayak İzinizi Hesaplayın</h1>
+            <p class="lead">Günlük alışkanlıklarınızın çevresel etkisini öğrenin ve daha yeşil bir gelecek için adımlar atın.</p>
+            <a href="#calculate" class="btn btn-primary btn-lg mt-3">Hemen Başla</a>
+        </div>
+    </section>
+
+    <section id="calculate" class="py-5">
+        <div class="container">
+            <ul class="nav nav-tabs mb-4" id="calcTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="individual-tab" data-bs-toggle="tab" data-bs-target="#individual" type="button" role="tab" aria-controls="individual" aria-selected="true">Bireysel</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="corporate-tab" data-bs-toggle="tab" data-bs-target="#corporate" type="button" role="tab" aria-controls="corporate" aria-selected="false">Kurumsal</button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="calcTabsContent">
+                <!-- Bireysel Hesaplama -->
+                <div class="tab-pane fade show active" id="individual" role="tabpanel" aria-labelledby="individual-tab">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3>Kayıt Ol</h3>
+                            <form id="registerForm" class="mb-4">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Kullanıcı Adı</label>
+                                    <input type="text" class="form-control" id="username" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">E-posta</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Parola</label>
+                                    <input type="password" class="form-control" id="password" required>
+                                </div>
+                                <button type="submit" class="btn btn-secondary">Kayıt Ol</button>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Bireysel Hesaplama</h3>
+                            <form id="carbonForm">
+                                <div class="mb-3">
+                                    <label for="user_id" class="form-label">Kullanıcı ID (Kayıttan sonra görünür)</label>
+                                    <input type="number" class="form-control" id="user_id" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="energy" class="form-label">Enerji Tüketimi (kWh)</label>
+                                    <input type="number" class="form-control" id="energy" step="0.1" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="transport" class="form-label">Ulaşım (km)</label>
+                                    <input type="number" class="form-control" id="transport" step="0.1" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="food" class="form-label">Gıda Türü</label>
+                                    <select class="form-select" id="food" required>
+                                        <option value="vegetarian">Vejetaryen</option>
+                                        <option value="meat">Et</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Hesapla</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div id="result" class="mt-4 p-3 bg-light rounded"></div>
+                </div>
+                <!-- Kurumsal Hesaplama -->
+                <div class="tab-pane fade" id="corporate" role="tabpanel" aria-labelledby="corporate-tab">
+                    <h3>Kurumsal Hesaplama</h3>
+                    <p>Kurumsal karbon ayak izi hesaplaması için lütfen bizimle iletişime geçin.</p>
+                    <a href="mailto:info@yesiladim.com" class="btn btn-outline-primary">İletişim</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="bg-light py-5">
+        <div class="container">
+            <h2>Karbon Ayak İzi Nedir?</h2>
+            <p>Karbon ayak izi, bireylerin veya kuruluşların faaliyetleri sonucu atmosfere salınan sera gazlarının karbondioksit (CO2) eşdeğeri cinsinden ölçümüdür. Enerji tüketimi, ulaşım ve gıda seçimleri gibi günlük alışkanlıklarınız bu izi oluşturur.</p>
+            <p><strong>Neden Önemli?</strong> Karbon ayak izinizi hesaplayarak çevresel etkinizi anlayabilir ve küresel ısınmayı azaltmak için adımlar atabilirsiniz.</p>
+            <p><strong>Nasıl Azaltılır?</strong></p>
+            <ul>
+                <li>Toplu taşıma veya bisiklet kullanın.</li>
+                <li>Enerji verimli cihazlar tercih edin.</li>
+                <li>Et tüketimini azaltarak ve yerel ürünleri seçerek gıda kaynaklı emisyonları düşürün.</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>© 2025 Yeşil Adım. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Kayıt formu
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            };
+            try {
+                const response = await fetch('/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                document.getElementById('result').innerHTML = response.ok
+                    ? `<div class="alert alert-success">Kayıt başarılı! Kullanıcı ID: ${result.user_id}</div>`
+                    : `<div class="alert alert-danger">Hata: ${result.error}</div>`;
+            } catch (error) {
+                document.getElementById('result').innerHTML = `<div class="alert alert-danger">Hata: ${error.message}</div>`;
+            }
+        });
+
+        // Hesaplama formu
+        document.getElementById('carbonForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                user_id: document.getElementById('user_id').value,
+                energy_kwh: document.getElementById('energy').value,
+                transport_km: document.getElementById('transport').value,
+                food_type: document.getElementById('food').value
+            };
+            try {
+                const response = await fetch('/calculate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                document.getElementById('result').innerHTML = response.ok
+                    ? `<div class="alert alert-success">
+                           <h4>Sonuç</h4>
+                           <p>Karbon Ayak İzi: ${result.co2e.toFixed(2)} kg CO2e</p>
+                           <p><strong>Tavsiyeler:</strong> ${result.recommendation}</p>
+                       </div>`
+                    : `<div class="alert alert-danger">Hata: ${result.error}</div>`;
+            } catch (error) {
+                document.getElementById('result').innerHTML = `<div class="alert alert-danger">Hata: ${error.message}</div>`;
+            }
+        });
+    </script>
+</body>
+</html>
