@@ -24,7 +24,7 @@ def get_gemini_recommendation(prediction):
     prompt = f"""
     The user's annual carbon footprint is {prediction:.2f} kg CO2.  
 Evaluate this value: If it is low, congratulate the user and emphasize the importance of their efforts. If it is average, offer some suggestions for improvement. If it is high, highlight that it is high and provide actionable tips on how to improve their lifestyle.  
-Write a brief, motivational, and sensible explanation about environmentally friendly behaviors. Keep the response concise and in Turkish.
+Write a brief, motivational, and sensible explanation about environmentally friendly behaviors. Give them detailed suggestions for how to reduce carbon footprint and keep the response concise and in Turkish. 
     """
     model = genai.GenerativeModel("gemini-1.5-flash")
     response = model.generate_content(prompt)
