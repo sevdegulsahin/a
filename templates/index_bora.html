@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Footprint Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input[type="number"], select, input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .plot {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .plot img {
+            max-width: 70%; /* Pasta grafiği için boyutu küçülttük */
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Carbon Footprint Calculator</h1>
+    <form method="POST" action="/predict">
+        <label for="Body_Type">Body Type:</label>
+        <select name="Body_Type" required>
+            <option value="normal">Normal</option>
+            <option value="overweight">Overweight</option>
+            <option value="obese">Obese</option>
+            <option value="underweight">Underweight</option>
+        </select>
+
+        <label for="Sex">Sex:</label>
+        <select name="Sex" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+
+        <label for="Diet">Diet:</label>
+        <select name="Diet" required>
+            <option value="omnivore">Omnivore</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="vegan">Vegan</option>
+            <option value="pescatarian">Pescatarian</option>
+        </select>
+
+        <label for="How_Often_Shower">How Often Shower:</label>
+        <select name="How_Often_Shower" required>
+            <option value="daily">Daily</option>
+            <option value="less frequently">Less Frequently</option>
+            <option value="more frequently">More Frequently</option>
+            <option value="twice a day">Twice a Day</option>
+        </select>
+
+        <label for="Heating_Energy_Source">Heating Energy Source:</label>
+        <select name="Heating_Energy_Source" required>
+            <option value="coal">Coal</option>
+            <option value="natural gas">Natural Gas</option>
+            <option value="electricity">Electricity</option>
+            <option value="wood">Wood</option>
+        </select>
+
+        <label for="Transport">Transport:</label>
+        <select name="Transport" required>
+            <option value="public">Public</option>
+            <option value="private">Private</option>
+            <option value="walk/bicycle">Walk/Bicycle</option>
+        </select>
+
+        <label for="Vehicle_Type">Vehicle Type (if applicable):</label>
+        <select name="Vehicle_Type">
+            <option value="None">None</option>
+            <option value="petrol">Petrol</option>
+            <option value="diesel">Diesel</option>
+            <option value="hybrid">Hybrid</option>
+            <option value="lpg">LPG</option>
+            <option value="electric">Electric</option>
+        </select>
+
+        <label for="Social_Activity">Social Activity:</label>
+        <select name="Social_Activity" required>
+            <option value="often">Often</option>
+            <option value="sometimes">Sometimes</option>
+            <option value="never">Never</option>
+        </select>
+
+        <label for="Monthly_Grocery_Bill">Monthly Grocery Bill ($):</label>
+        <input type="number" name="Monthly_Grocery_Bill" required min="0">
+
+        <label for="Frequency_of_Traveling_by_Air">Frequency of Traveling by Air:</label>
+        <select name="Frequency_of_Traveling_by_Air" required>
+            <option value="never">Never</option>
+            <option value="rarely">Rarely</option>
+            <option value="frequently">Frequently</option>
+            <option value="very frequently">Very Frequently</option>
+        </select>
+
+        <label for="Vehicle_Monthly_Distance_Km">Vehicle Monthly Distance (km):</label>
+        <input type="number" name="Vehicle_Monthly_Distance_Km" required min="0">
+
+        <label for="Waste_Bag_Size">Waste Bag Size:</label>
+        <select name="Waste_Bag_Size" required>
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+            <option value="extra large">Extra Large</option>
+        </select>
+
+        <label for="Waste_Bag_Weekly_Count">Waste Bag Weekly Count:</label>
+        <input type="number" name="Waste_Bag_Weekly_Count" required min="0">
+
+        <label for="How_Long_TV_PC_Daily_Hour">How Long TV/PC Daily (hours):</label>
+        <input type="number" name="How_Long_TV_PC_Daily_Hour" required min="0">
+
+        <label for="How_Many_New_Clothes_Monthly">How Many New Clothes Monthly:</label>
+        <input type="number" name="How_Many_New_Clothes_Monthly" required min="0">
+
+        <label for="How_Long_Internet_Daily_Hour">How Long Internet Daily (hours):</label>
+        <input type="number" name="How_Long_Internet_Daily_Hour" required min="0">
+
+        <label for="Energy_efficiency">Energy Efficiency:</label>
+        <select name="Energy_efficiency" required>
+            <option value="No">No</option>
+            <option value="Sometimes">Sometimes</option>
+            <option value="Yes">Yes</option>
+        </select>
+
+        <label>Recycling:</label>
+        <input type="checkbox" name="Recycling" value="Paper"> Paper<br>
+        <input type="checkbox" name="Recycling" value="Plastic"> Plastic<br>
+        <input type="checkbox" name="Recycling" value="Glass"> Glass<br>
+        <input type="checkbox" name="Recycling" value="Metal"> Metal<br>
+
+        <label>Cooking With:</label>
+        <input type="checkbox" name="Cooking_With" value="Stove"> Stove<br>
+        <input type="checkbox" name="Cooking_With" value="Oven"> Oven<br>
+        <input type="checkbox" name="Cooking_With" value="Microwave"> Microwave<br>
+        <input type="checkbox" name="Cooking_With" value="Grill"> Grill<br>
+        <input type="checkbox" name="Cooking_With" value="Airfryer"> Airfryer<br>
+
+        <button type="submit">Calculate Carbon Footprint</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result">{{ prediction }}</div>
+    {% endif %}
+    {% if plot_data %}
+    <div class="plot">
+        <img src="data:image/png;base64,{{ plot_data }}" alt="Carbon Footprint Plot">
+    </div>
+    {% endif %}
+</body>
+</html>
