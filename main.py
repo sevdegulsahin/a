@@ -25,9 +25,12 @@ app = FastAPI()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 def get_gemini_recommendation(prediction):
     prompt = f"""
-    The user's annual carbon footprint is {prediction:.2f} kg CO2.  
-Evaluate this value: If it is low, congratulate the user and emphasize the importance of their efforts. If it is average, offer some suggestions for improvement. If it is high, highlight that it is high and provide actionable tips on how to improve their lifestyle.  
-Write a brief, motivational, and sensible explanation about environmentally friendly behaviors. Give them brief suggestions for how to reduce carbon footprint and keep the response concise and in Turkish. 
+     Your annual carbon footprint is {prediction:.2f} kg CO2.
+
+Based on this value, evaluate whether it's low, average, or high. If it's low (0-2000 kg CO2), congratulate the user and emphasize the importance of maintaining such eco-friendly habits. If it's average (2000-5000 kg CO2), suggest practical tips to reduce carbon footprint. If it's high (5000+ kg CO2), inform the user of the high value and provide actionable steps to improve their lifestyle.
+
+Regardless of the footprint value, conclude with concise, motivating, and environmentally friendly suggestions to help the user reduce their carbon footprint. Make the answer in Turkish
+
     """
     model = genai.GenerativeModel("gemini-1.5-flash")
     response = model.generate_content(prompt)
