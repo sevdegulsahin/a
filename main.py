@@ -24,9 +24,9 @@ app = FastAPI()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 def get_gemini_recommendation(prediction):
     prompt = f"""
-    Kullanıcının yıllık karbon ayak izi {prediction:.2f} kg CO2. 
-    Bu değeri değerlendir ve kullanıcıya yaşam tarzını nasıl iyileştirebileceği konusunda öneriler ver. 
-    Sayısal analiz ve çevre dostu davranışlar üzerine mantıklı, motive edici bir açıklama yaz.
+    The user's annual carbon footprint is {prediction:.2f} kg CO2.  
+Evaluate this value: If it is low, congratulate the user and emphasize the importance of their efforts. If it is average, offer some suggestions for improvement. If it is high, highlight that it is high and provide actionable tips on how to improve their lifestyle.  
+Write a brief, motivational, and sensible explanation about environmentally friendly behaviors. Keep the response concise and in Turkish.
     """
     model = genai.GenerativeModel("gemini-1.5-flash")
     response = model.generate_content(prompt)
