@@ -16,9 +16,9 @@ from sklearn.linear_model import LinearRegression
 
 
 
-df = pd.read_csv('a/carbon_emission.csv')
+df = pd.read_csv('carbon_emission.csv')
 df.head()
-
+df.columns
 df.shape
 df.dtypes
 df.dtypes.value_counts()
@@ -114,9 +114,9 @@ print("Stacking Model'in beklediği özellikler:", stacking_model.feature_names_
 
 
 # stacking_model, one hot encoding ve standardscaler işlemlerini .pickle ile kaydetme (bunları kullanacağım)  (a klasörüne kaydettim bu adı düzenleyelim..!)
-joblib.dump(stacking_model, 'a/stacking_model.pkl')
-joblib.dump(ohe, 'a/ohe.pkl')
-joblib.dump(ss_dict, 'a/standard_scalers.pkl')
+joblib.dump(stacking_model, 'stacking_model.pkl')
+joblib.dump(ohe, 'ohe.pkl')
+joblib.dump(ss_dict, 'standard_scalers.pkl')
 
 # scale edilmiş (ölçeklendirilmiş) sütun adları -> (kontrol amaçlı)
 print("Ölçeklendirilmiş sütunlar:", list(ss_dict.keys()))
