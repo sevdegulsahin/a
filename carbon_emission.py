@@ -104,9 +104,9 @@ stacking_model.fit(X_train, y_train)
 
 # oluşturulan stacking_model modelini predict yaptırıp ölçüm metrikleri hesaplama
 stacking_model_predict = stacking_model.predict(X_test)
-print(f'Random Forest Regression Mean Absolute Error -> {mean_absolute_error(y_test, stacking_model_predict)}')
-print(f'Random Forest Regression Mean Square Error -> {mean_squared_error(y_test, stacking_model_predict)}')
-print(f'Random Forest Regression R2 Score -> {r2_score(y_test, stacking_model_predict)}')
+print(f'Stacking Model Regression Mean Absolute Error -> {mean_absolute_error(y_test, stacking_model_predict)}')
+print(f'Stacking Model Regression Mean Square Error -> {mean_squared_error(y_test, stacking_model_predict)}')
+print(f'Stacking Model Regression R2 Score -> {r2_score(y_test, stacking_model_predict)}')
 
 
 # stacking_model regression modelinin beklediği özellikler -> (kontrol amaçlı)

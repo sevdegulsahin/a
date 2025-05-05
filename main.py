@@ -17,10 +17,11 @@ from dotenv import load_dotenv
 import google.generativeai as genai
 
 
-# .env dosyasını yükle
+# .env dosyasını yükleme (bu kısımda .env dosyasında yer alan gemini api keyini kullanarak kullanıcıdan gelen carbon footprint değerine göre öneri oluşturma)
 load_dotenv()
 
 app = FastAPI()
+
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 def get_gemini_recommendation(prediction):
     prompt = f"""
@@ -33,15 +34,15 @@ Write a brief, motivational, and sensible explanation about environmentally frie
     return response.text
 
 
-# Jinja2 şablonları
+# jinja2 templateleri oluşturma
 templates = Jinja2Templates(directory="templates")
 
-# Supabase bağlantısını yapalım
+# supabase bağlantısını oluşturuma
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_API_KEY = os.getenv("SUPABASE_KEY")
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_API_KEY)
 
-# Model, OHE ve Scaler yükleme
+# tanımlanan model, ohe ve scaler'i yükleme
 BASE_DIR = os.path.dirname(__file__)
 model = joblib.load(os.path.join(BASE_DIR, "stacking_model.pkl"))
 ohe = joblib.load("ohe.pkl")
@@ -59,7 +60,7 @@ cat_cols = [
 ]
 
 def preprocess_user_input(user_input):
-    # Categoric verileri işleme
+    # categorical verileri işleme
     categorical_data = pd.DataFrame({col: [user_input.get(col, 'None')] for col in cat_cols})
     for col in ['Recycling', 'Cooking_With']:
         if isinstance(categorical_data[col][0], list):
@@ -67,13 +68,13 @@ def preprocess_user_input(user_input):
     categorical_encoded = ohe.transform(categorical_data[cat_cols])
     categorical_encoded_df = pd.DataFrame(categorical_encoded, columns=ohe.get_feature_names_out(cat_cols))
 
-    # Numerik verileri işleme
+    # numerical verileri işleme
     numerical_data = pd.DataFrame({col: [float(user_input.get(col, 0))] for col in num_cols})
     for col in num_cols:
         if col in scalers:
             numerical_data[col] = scalers[col].transform(numerical_data[[col]])
 
-    # Veriyi birleştirme
+    # veriyi concat kullanarak birleştirme
     processed_data = pd.concat([numerical_data, categorical_encoded_df], axis=1)
     for col in model.feature_names_in_:
         if col not in processed_data.columns:
@@ -131,7 +132,7 @@ async def predict(
 ):
 
     try:
-        # Kullanıcıdan gelen inputları alalım
+        # inputları alma
         user_input = {
             'Body Type': Body_Type,
             'Sex': Sex,
@@ -154,16 +155,16 @@ async def predict(
             'Cooking_With': Cooking_With
         }
 
-        # Inputları işleyelim
+        # inputları işleme
         processed_data = preprocess_user_input(user_input)
 
-        # XGBoost Regression modelini kullanarak tahmin yapalım
+        # stacking model regression modelini kullanarak tahmin yapma
         prediction = model.predict(processed_data)[0]
 
-        # Grafik oluşturma
+
         plot_data = carbon_footprint_graph(prediction)
 
-        # Sonuçları Supabase veritabanına kaydetme
+        # sonuçları supabase veritabanına kaydetme
         supabase.table('carbon_footprints').insert({
             "body_type": Body_Type,
             "sex": Sex,
