@@ -100,24 +100,56 @@ button:hover {
 }
 
 .result {
-  margin-top: 30px;
-  padding: 20px;
-  background-color: var(--accent);
-  border-radius: 8px;
-  font-size: 16px;
-  text-align: center;
-  color: var(--primary);
+    margin-top: 30px;
+    padding: 20px;
+    background-color: var(--accent);  /* Açık yeşilimsi arka plan */
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
+    color: var(--primary);
+    border: 1px solid var(--border);
+}
+
+.result h2 {
+    color: var(--highlight);  /* Başlık rengi */
+    font-size: 1.8em;
+    margin-bottom: 10px;
 }
 
 .plot {
-  margin-top: 25px;
-  text-align: center;
+    margin-top: 25px;
+    text-align: center;
+    background-color: var(--accent);  /* Arka plan rengini yeşilimsi yapıyoruz */
+    padding: 20px;  /* İsterseniz padding ekleyebilirsiniz */
+    border-radius: 8px;
 }
 
 .plot img {
-  max-width: 100%;
-  border-radius: 6px;
-  border: 1px solid var(--border);
+    max-width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hafif gölge efekti */
+}
+
+.recommendation {
+    background-color: var(--white);
+    padding: 20px;
+    margin-top: 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    color: var(--primary);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border);
+}
+
+.recommendation h3 {
+    color: var(--highlight);  /* Başlık rengi */
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.recommendation p {
+    line-height: 1.6;
 }
 
 hr {
