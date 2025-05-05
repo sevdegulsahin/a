@@ -4,7 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carbon Footprint Calculator</title>
-      <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary: #2f4858;
+            --highlight: #519872;        /* Başlık ve vurgular için yeşil */
+            --accent: #dbe9f4;           /* Hafif mavi arka plan */
+            --button: #5b7db1;           /* Buton rengi (soft mavi) */
+            --button-hover: #466aa0;     /* Hover buton */
+            --background: #f5f7fa;
+            --white: #ffffff;
+            --border: #dcdcdc;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            margin: 0;
+            padding: 20px;
+            color: var(--primary);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.3em;
+            color: var(--button);
+            margin-bottom: 30px;
+        }
+
+        form {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 800px;
+            margin: auto;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--border);
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--primary);
+        }
+
+        input[type="number"],
+        select,
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background-color: #fff;
+            transition: border-color 0.3s;
+        }
+
+        input[type="number"]:focus,
+        select:focus,
+        input[type="text"]:focus {
+            border-color: var(--highlight);
+            outline: none;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        button {
+            background-color: var(--button);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--button-hover);
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: var(--accent);
+            border-radius: 8px;
+            font-size: 16px;
+            text-align: center;
+            color: var(--primary);
+        }
+
+        .plot {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .plot img {
+            max-width: 100%;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        hr {
+            margin: 30px 0;
+            border: none;
+            border-top: 1px solid var(--border);
+        }
+    </style>
 </head>
 <body>
     <h1>Carbon Footprint Calculator</h1>
