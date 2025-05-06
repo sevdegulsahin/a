@@ -25,20 +25,6 @@ Veriler **Supabase** ile saklanır, öneriler **Gemini API** ile oluşturulur.
 
 ---
 
-## 📁 Proje Yapısı
-
-carbon-footprint-api/
-├── main.py
-├── model_training.py
-├── stacking_model.pkl
-├── ohe.pkl
-├── standard_scalers.pkl
-├── .env
-├── requirements.txt
-└── README.md
-
----
-
 ## ⚙️ Kurulum
 
 ### Gereksinimler
@@ -56,17 +42,15 @@ carbon-footprint-api/
    git clone https://github.com/sevdegulsahin/a.git
    cd a
 
-### Sanal Ortam Oluşturun ve Etkinleştirin:
+# 🧪 Sanal Ortam Oluşturun ve Etkinleştirin
 python -m venv .venv
 source .venv/bin/activate  # Windows için: .venv\Scripts\activate
 
-### Bağımlılıkları Yükleyin:
-pip install fastapi uvicorn jinja2 python-multipart pandas numpy matplotlib seaborn joblib supabase google-generativeai python-dotenv xgboost scikit-learn
+# 📦 Bağımlılıkları Yükleyin
+pip install -r requirements.txt
 
-### Uygulamayı Çalıştırın:
+# 🚀 Uygulamayı Başlatın
 uvicorn main:app --reload --port 5056
-Uygulama http://127.0.0.1:5056 adresinde çalışacaktır.
---reload bayrağı, geliştirme sırasında dosya değişikliklerini otomatik olarak algılar.
 
 ## 📝 Kullanım
 
