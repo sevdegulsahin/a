@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 import google.generativeai as genai
 
 
-# .env dosyasını yükleme (bu kısımda .env dosyasında yer alan gemini api keyini kullanarak kullanıcıdan gelen carbon footprint değerine göre öneri oluşturma)
+# .env dosyasını yükleme (bu kısımda .env dosyasında yer alan gemini api keyini kullanarak kullanıcıdan alınan carbon footprint değerlerinin hesaplanması sonucu gemini ile öneri oluşturma)
 load_dotenv()
 
 app = FastAPI()
@@ -25,11 +25,11 @@ app = FastAPI()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 def get_gemini_recommendation(prediction):
     prompt = f"""
-     Your annual carbon footprint is {prediction:.2f} kg CO2.
+    Your annual carbon footprint is {prediction:.2f} kg CO2.
 
 Based on this value, evaluate whether it's low, average, or high. If it's low (0-2000 kg CO2), congratulate the user and emphasize the importance of maintaining such eco-friendly habits. If it's average (2000-5000 kg CO2), suggest practical tips to reduce carbon footprint. If it's high (5000+ kg CO2), inform the user of the high value and provide actionable steps to improve their lifestyle.
 
-Regardless of the footprint value, conclude with concise, motivating, and environmentally friendly suggestions to help the user reduce their carbon footprint. Make the answer in Turkish
+Regardless of the footprint value, conclude with concise, motivating, and environmentally friendly suggestions to help the user reduce their carbon footprint. Write suggestions as plain text, without list marks (* or -), with each suggestion on a new line as a paragraph.
 
     """
     model = genai.GenerativeModel("gemini-1.5-flash")
@@ -179,7 +179,7 @@ async def predict(
     "index_bora.html",
     {
         "request": request,
-        "prediction": f"Estimated Carbon Emission: {prediction:.2f} kg CO2/year",
+        "prediction": f"Carbon Emission: {prediction:.2f} kg CO2/year",
         "plot_data": plot_data,
         "recommendation": recommendation
     }
